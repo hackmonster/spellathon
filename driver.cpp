@@ -123,7 +123,7 @@ int findCeil(char str[], char first, int l, int h)
 }
  
 // Print all permutations of str in sorted order
-void sortedPermutations(char str[])
+string sortedPermutations(char str[])
 {
     // Get size of string
     int size = strlen(str);
@@ -139,7 +139,10 @@ void sortedPermutations(char str[])
         static int x = 1;
         //printf("%d  %s \n", x++, str);
  		if(search(T, str))
-    		cout<<str<<endl;
+ 		{
+    		//cout<<str<<endl;
+    		return str;
+    	}
         // Find the rightmost character which is smaller than its next
         // character. Let us call it 'first char'
         int i;
@@ -164,11 +167,12 @@ void sortedPermutations(char str[])
             qsort(str + i + 1, size - i - 1, sizeof(str[0]), compare);
         }
     }
+    return NULL;
 }
 
-int main(int argc, char **argv)
+string solve(string s)
 {
-    ifstream input("words_eng.txt");
+	ifstream input("words_eng.txt");
     string train_string;
     
     while(input >> train_string)
@@ -181,8 +185,20 @@ int main(int argc, char **argv)
         //cout<<"inserting : "<<str<<endl;
     	insert(T, str);
     }
-	char *s = argv[1];
-	sortedPermutations( s );
+    char *str = new char[100];
+    int i=0;
+    do{
+     	str[i] = tolower(s[i]);
+    }while(str[i++]!='\0');
+    s = sortedPermutations(str);
+    return s;
+}
+
+int main(int argc, char **argv)
+{
+	string s = argv[1];
+    cout<<solve(s);
+	//sortedPermutations( s );
     cout<<endl<<"------------"<<endl;
     return 0;
 }
