@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+//#include <jni.h>
 #include <fstream>
 using namespace std;
 
@@ -172,6 +173,17 @@ string sortedPermutations(char str[])
 
 string solve(string s)
 {
+    char *str = new char[100];
+    int i=0;
+    do{
+     	str[i] = tolower(s[i]);
+    }while(str[i++]!='\0');
+    s = sortedPermutations(str);
+    return s;
+}
+
+void train()
+{
 	ifstream input("words_eng.txt");
     string train_string;
     
@@ -185,18 +197,12 @@ string solve(string s)
         //cout<<"inserting : "<<str<<endl;
     	insert(T, str);
     }
-    char *str = new char[100];
-    int i=0;
-    do{
-     	str[i] = tolower(s[i]);
-    }while(str[i++]!='\0');
-    s = sortedPermutations(str);
-    return s;
 }
 
 int main(int argc, char **argv)
 {
 	string s = argv[1];
+	train();
     cout<<solve(s);
 	//sortedPermutations( s );
     cout<<endl<<"------------"<<endl;
